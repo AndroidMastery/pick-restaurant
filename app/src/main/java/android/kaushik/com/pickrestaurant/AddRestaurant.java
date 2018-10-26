@@ -3,12 +3,21 @@ package android.kaushik.com.pickrestaurant;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class AddRestaurant extends AppCompatActivity implements View.OnClickListener{
 
+    private ArrayList<String> restaurantList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,18 +29,35 @@ public class AddRestaurant extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
 
-        String restaurant_name = findViewById(R.id.restaurant_name).toString();
+        TextView textView = (TextView) findViewById(R.id.restaurant_name);
+        String restaurant_name = textView.getText().toString();
+        Intent getIntent = getIntent();
+        restaurantList = getIntent.getStringArrayListExtra("restaurantList");
+        String internalStorageFile = getIntent.getStringExtra("internal_storage");
+        restaurantList.add(restaurant_name);
 
-        save_restaurant();
+        writeToInternalStorage(new File(internalStorageFile));
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
     }
 
-    public void save_restaurant()
-    {
-        // Asset files cannot be edited. Write the updates to an internal storage
+    public void writeToInternalStorage(File file){
+        try{
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            Log.i("WriteToInternalStorage", file.getAbsolutePath());
+            for(String restaurantName : restaurantList)
+            {
+                bufferedWriter.write(restaurantName+'\n');
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
 
+        }
+        catch(Exception e)
+        {
+            Log.e("MainActivity", "Error wile writing to internal storage");
+        }
     }
 }

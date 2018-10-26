@@ -10,10 +10,16 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,12 +27,28 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public ArrayList<String> restaurantList = new ArrayList<String>();
+    public String restaurantsListFileName = "restaurants_data.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        restaurantList = loadRestaurantsList();
+        // If internal storage file exists, don't read from asset file.
+        // else, read from asset file. Asset file should only be used for first time initialization.
+        File filePath = new File(getFilesDir()+"/"+restaurantsListFileName);
+        if(filePath.exists())
+        {
+            // read from internal storage file
+            restaurantList = readFromInternalStorage(filePath);
+        }
+        else
+        {
+            restaurantList = loadRestaurantsList();
+            // write to internal storage file
+            writeToInternalStorage(filePath);
+        }
+
+
         Button pick_button = (Button) findViewById(R.id.pick_button);
         pick_button.setOnClickListener(this);
         Button add_restaurant_button = (Button) findViewById(R.id.add_restaurant);
@@ -35,6 +57,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         show_all_restaurants_button.setOnClickListener(this);
 
 
+    }
+
+    public ArrayList<String> readFromInternalStorage(File file)
+    {
+        ArrayList<String> list = new ArrayList<String>();
+        try{
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            Log.i("ReadFromInternalStorage", file.getAbsolutePath());
+            String str;
+            while((str = bufferedReader.readLine()) != null)
+            {
+                list.add(str);
+            }
+            bufferedReader.close();
+        }
+        catch(Exception e)
+        {
+            Log.e("MainActivity", "Error wile reading from internal storage");
+        }
+
+        return list;
+    }
+
+    public void writeToInternalStorage(File file){
+        try{
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            Log.i("WriteToInternalStorage", file.getAbsolutePath());
+            for(String restaurantName : restaurantList)
+            {
+                bufferedWriter.write(restaurantName+'\n');
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+
+        }
+        catch(Exception e)
+        {
+            Log.e("MainActivity", "Error wile writing to internal storage");
+        }
     }
 
     public ArrayList<String> loadRestaurantsList()
@@ -53,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         catch(IOException io)
         {
-            // catch the exception here
+            Log.e("MainActivity", "Error wile loading from assets file");
         }
         return restaurantList;
 
@@ -85,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void add_new_restaurant()
     {
         Intent intent = new Intent(this, AddRestaurant.class);
+        intent.putStringArrayListExtra("restaurantList", restaurantList);
+        intent.putExtra("internal_storage", getFilesDir()+"/"+restaurantsListFileName);
         startActivity(intent);
 
     }
