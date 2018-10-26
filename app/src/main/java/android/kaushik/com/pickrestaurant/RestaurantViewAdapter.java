@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter{
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final View view;
         public final TextView restaurantItem;
+        public final Button removeRestaurantItem;
 
         public ViewHolder(View view)
         {
@@ -29,6 +31,7 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter{
 
             this.view = view;
             restaurantItem = view.findViewById(R.id.restaurant_item);
+            removeRestaurantItem = view.findViewById(R.id.remove_button);
         }
     }
 
