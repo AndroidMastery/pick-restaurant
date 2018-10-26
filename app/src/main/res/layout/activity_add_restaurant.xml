@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRestaurant">
+
+    <TextView
+        android:id="@+id/add_restaurant_title"
+        android:layout_width="195dp"
+        android:layout_height="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="89dp"
+        android:text="Add Restaurant Details"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/restaurant_name_label"
+        android:layout_width="62dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="112dp"
+        android:text="Name :"
+        android:textAlignment="textEnd" />
+
+    <EditText
+        android:id="@+id/restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/restaurant_name_label"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="92dp"
+        android:ems="10"
+        android:hint="Enter Restaurant Name"
+        android:inputType="textPersonName"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/save_restaurant_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/restaurant_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="199dp"
+        android:text="Save" />
+
+</RelativeLayout>
