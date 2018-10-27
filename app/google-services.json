@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "307922947638",
+    "firebase_url": "https://pick-restaurant.firebaseio.com",
+    "project_id": "pick-restaurant",
+    "storage_bucket": "pick-restaurant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307922947638:android:845ed0809204d6a2",
+        "android_client_info": {
+          "package_name": "android.kaushik.com.pickrestaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307922947638-669frog0bb996u690i0igm4f75f4hrth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.kaushik.com.pickrestaurant",
+            "certificate_hash": "9f21dbf37c13a7c9d08ae3166998ff1958983324"
+          }
+        },
+        {
+          "client_id": "307922947638-1ka1ujmfn36r1mmifqs730rtrpqombak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9AgKaB91t5iSdNLQ_f9thoKGfOhJLzh4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307922947638-1ka1ujmfn36r1mmifqs730rtrpqombak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

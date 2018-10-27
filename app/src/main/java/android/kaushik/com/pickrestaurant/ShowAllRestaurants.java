@@ -3,8 +3,10 @@ package android.kaushik.com.pickrestaurant;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,12 +28,14 @@ public class ShowAllRestaurants extends AppCompatActivity implements View.OnClic
 
         RecyclerView recyclerView = findViewById(R.id.show_all_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(new RestaurantViewAdapter(restaurantList));
 
     }
 
     @Override
     public void onClick(View view) {
+
 
     }
 }

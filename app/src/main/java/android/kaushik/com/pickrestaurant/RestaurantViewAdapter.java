@@ -2,6 +2,7 @@ package android.kaushik.com.pickrestaurant;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class RestaurantViewAdapter extends RecyclerView.Adapter{
+public class RestaurantViewAdapter extends RecyclerView.Adapter implements RecyclerView.OnClickListener{
+
 
     private ArrayList<String> restaurantList;
 
@@ -44,10 +46,18 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        String restaurantName = restaurantList.get(position);
+
         TextView textView = holder.itemView.findViewById(R.id.restaurant_item);
         textView.setText(restaurantList.get(position));
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId())
+        {
+            case R.id.remove_button:
+                Log.i("Adapter", "Remove button clicked");
+        }
     }
 
     public int getItemCount() {
