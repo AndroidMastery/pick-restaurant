@@ -8,61 +8,113 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="50dp"
-        android:paddingTop="50dp"
-        android:paddingRight="50dp"
-        android:paddingBottom="60dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="60dp"
-            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:gravity="center_horizontal"
-            android:text="Add New User"
-            android:textSize="26sp" />
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp"
+            android:paddingRight="50dp"
+            android:paddingBottom="60dp">
 
-        <EditText
-            android:id="@+id/new_user_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:hint="Enter username"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Add New User"
+                android:textSize="26sp" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="(Must be an existing user)" />
+            <EditText
+                android:id="@+id/new_user_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="Enter username"
+                android:inputType="textEmailAddress" />
 
-        <Button
-            android:id="@+id/add_new_user_button"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="(Must be an existing user)" />
+
+            <Button
+                android:id="@+id/add_new_user_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_blue_dark"
+                android:text="Add User" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_dark"
-            android:text="Add User" />
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="Invite A Friend"
+                android:textAlignment="center"
+                android:textSize="26sp" />
+
+            <EditText
+                android:id="@+id/invite_email_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:hint="Friend's email address"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/invite_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/holo_blue_dark"
+                android:text="Invite" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>
