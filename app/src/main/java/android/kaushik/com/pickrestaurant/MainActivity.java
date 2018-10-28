@@ -3,6 +3,7 @@ package android.kaushik.com.pickrestaurant;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.pick_button).setOnClickListener(this);
         findViewById(R.id.add_restaurant).setOnClickListener(this);
         findViewById(R.id.show_all_button).setOnClickListener(this);
+        findViewById(R.id.new_poll_fab_action).setOnClickListener(this);
+        findViewById(R.id.add_user_fab_action).setOnClickListener(this);
 
 
     }
@@ -163,16 +166,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId())
         {
             case R.id.pick_button:
-                Log.i("Button clicked: ", "Select Restaurant");
                 show_selected_restaurant();
                 break;
             case R.id.show_all_button:
-                Log.i("Button clicked: ", "Show All Restaurants");
                 show_all_restaurants();
                 break;
             case R.id.add_restaurant:
-                Log.i("Button clicked: ", "Add Restaurant");
                 add_new_restaurant();
+                break;
+            case R.id.add_user_fab_action:
+                goToActivity(AddNewUserActivity.class);
+                break;
+            case R.id.new_poll_fab_action:
+                goToActivity(CreatePollActivity.class);
                 break;
             default:
                 break;
@@ -180,6 +186,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    public void goToActivity(Class classname)
+    {
+        Intent intent = new Intent(this, classname);
+        startActivity(intent);
+    }
+
 
     public void add_new_restaurant()
     {

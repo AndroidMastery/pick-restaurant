@@ -56,4 +56,34 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:fab_addButtonColorNormal="@android:color/holo_blue_dark">
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:fab_size="mini"
+            app:fab_icon="@drawable/ic_poll_black_24dp"
+            android:id="@+id/new_poll_fab_action"
+            app:fab_title="New Poll"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:fab_size="mini"
+            app:fab_icon="@drawable/ic_person_add_black_24dp"
+            android:id="@+id/add_user_fab_action"
+            app:fab_title="Add User"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+
 </RelativeLayout>

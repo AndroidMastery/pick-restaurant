@@ -29,7 +29,9 @@
         <activity android:name=".ToolBar" />
         <activity android:name=".GroupSetupSkipActivity" />
         <activity android:name=".JoinGroupActivity" />
-        <activity android:name=".CreateGroupActivity"></activity>
+        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".CreatePollActivity" />
+        <activity android:name=".AddNewUserActivity"></activity>
     </application>
 
 </manifest>
