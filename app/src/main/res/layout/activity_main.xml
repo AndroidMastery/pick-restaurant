@@ -6,55 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/pick_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="38dp"
-        android:width="300dp"
-        android:background="@android:color/darker_gray"
-        android:padding="5dp"
-        android:text="What's for lunch? "
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="222dp" />
-
-    <Button
-        android:id="@+id/add_restaurant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="187dp"
-        android:text="Add Restaurant" />
-
-    <Button
-        android:id="@+id/show_all_button"
-        android:layout_width="141dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/add_restaurant"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="28dp"
-        android:text="Show All" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="121dp"
-        android:layout_alignEnd="@+id/add_restaurant"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-225dp"
-        android:layout_marginBottom="151dp"
-        android:orientation="horizontal"></LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <include
-        layout="@layout/activity_tool_bar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        <include
+            layout="@layout/activity_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <Button
+                android:id="@+id/pick_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:width="300dp"
+                android:background="@drawable/button_curved_edges"
+                android:padding="5dp"
+                android:shadowRadius="50"
+                android:text="What's for lunch? "
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/create_poll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="300dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_curved_edges"
+                android:padding="5dp"
+                android:text="Create Poll"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/add_restaurant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:width="300dp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_curved_edges"
+                android:text="Buzz Team"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/show_all_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_alignTop="@+id/add_restaurant"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:width="300dp"
+                android:background="@drawable/button_curved_edges"
+                android:text="Restaurants List" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
