@@ -10,4 +10,6 @@
         android:id="@+id/show_all_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include layout="@layout/activity_tool_bar"/>
 </RelativeLayout>

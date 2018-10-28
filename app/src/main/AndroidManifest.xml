@@ -17,6 +17,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -24,7 +25,11 @@
         <activity android:name=".ShowRestaurant" />
         <activity android:name=".AddRestaurant" />
         <activity android:name=".ShowAllRestaurants" />
-        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".ToolBar" />
+        <activity android:name=".GroupSetupSkipActivity" />
+        <activity android:name=".JoinGroupActivity" />
+        <activity android:name=".CreateGroupActivity"></activity>
     </application>
 
 </manifest>

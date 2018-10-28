@@ -1,14 +1,16 @@
 package android.kaushik.com.pickrestaurant.firebase;
 
+import android.content.SharedPreferences;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class User {
 
-    private int userId; //TODO: Change to a bigger value than int
     private String username;
     private String firstname;
     private String lastname;
+    private String groupName;
 
     User(){ }
 
@@ -16,6 +18,7 @@ public class User {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.groupName = "(Not Available)";
     }
 
     public String getUsername() {
@@ -40,6 +43,14 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
 }

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
@@ -51,7 +53,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         {
             case R.id.user_profile_save_button:
                 // This is to hide the message TextView that would show "user profile saved successfully" or "username is mandatory" error messages
-                setMessageView(null);
 
                 User user = new User(this.getStringFromTextViewId(R.id.username_textview),
                         this.getStringFromTextViewId(R.id.firstname_textview),
@@ -83,42 +84,46 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         Log.i(TAG, "setMessageView - end");
     }
 
-    public boolean validateUser(User user)
+    public String validateUser(User user)
     {
-        Log.i(TAG, "validateUser - start");
+
         String message;
         if(user.getUsername().isEmpty())
         {
-             message = "username is mandatory!";
-            setMessageView(message);
-            Log.i(TAG, "validateUser - end");
-            return false;
+             message = "ERROR: username is mandatory!";
+            return message;
         }
         message = "User details saved successfully!";
-        setMessageView(message);
-        Log.i(TAG, "validateUser - end");
-        return true;
+        return message;
     }
 
     public void addUser(User user)
     {
         Log.i(TAG, "addUser - start");
-        if(validateUser(user))
+        String validateUserMessage = validateUser(user);
+        if(!validateUserMessage.startsWith("ERROR"))
         {
             // Get database reference
             databaseReference = firebaseDatabase.getReference("users");
             databaseReference.push().setValue(user);
 
-
-            Log.i(TAG, "username entered: " + user.getUsername());
             sharedPreferencesEditor = sharedPreferences.edit();
             sharedPreferencesEditor.putString("username",user.getUsername());
+            sharedPreferencesEditor.putString("firstname", user.getFirstname());
+            sharedPreferencesEditor.putString("lastname", user.getLastname());
             sharedPreferencesEditor.apply();
             Log.i(TAG, "username : " + user.getUsername() + " added to preferences successfully!");
-            Log.i(TAG, "addUser - end");
 
-            Intent intent = new Intent(this, MainActivity.class);
+            Toast toast = Toast.makeText(getApplicationContext(), validateUserMessage, Toast.LENGTH_LONG);
+            toast.show();
+
+            Intent intent = new Intent(this, GroupSetupSkipActivity.class);
             startActivity(intent);
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), validateUserMessage, Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

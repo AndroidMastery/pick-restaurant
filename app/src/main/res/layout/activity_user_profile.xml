@@ -29,7 +29,7 @@
 
         <EditText
             android:id="@+id/username_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:autoText="false"
@@ -44,25 +44,26 @@
 
         <EditText
             android:id="@+id/firstname_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="Enter First Name"
+            android:hint="Enter First Name (Optional)"
             android:inputType="textPersonName"
             tools:layout_editor_absoluteX="84dp"
             tools:layout_editor_absoluteY="145dp" />
 
         <EditText
             android:id="@+id/lastname_textview"
-            android:layout_width="wrap_content"
+            android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="Enter Last Name"
+            android:hint="Enter Last Name (Optional)"
             android:inputType="textPersonName"
+            android:textSize="18sp"
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="208dp" />
 
@@ -79,7 +80,7 @@
 
         <Button
             android:id="@+id/user_profile_save_button"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
