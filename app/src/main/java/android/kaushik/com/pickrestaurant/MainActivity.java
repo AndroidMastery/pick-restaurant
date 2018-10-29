@@ -1,17 +1,16 @@
 package android.kaushik.com.pickrestaurant;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
-import android.support.design.widget.Snackbar;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -50,6 +49,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Use SharedPreferences to store data internally
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+
+
+        // Notifications related
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationChannel notificationChannel = new NotificationChannel(Constants.CHANNEL_ID, Constants.CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.setDescription(Constants.CHANNEL_DESCRIPTION);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.enableVibration(true);
+
+        notificationManager.createNotificationChannel(notificationChannel);
+
 
         // If username is not set, show user profile screen
         showUserProfileActivity(false);
@@ -97,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
 
     public ArrayList<String> readFromInternalStorage(File file)

@@ -65,25 +65,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-
-    private void setMessageView(String message)
-    {
-        Log.i(TAG, "setMessageView - start");
-        TextView textView = findViewById(R.id.message_textview_hidden);
-        if(message == null)
-            textView.setVisibility(View.INVISIBLE);
-        else{
-            textView.setText(message);
-            textView.setVisibility(View.VISIBLE);
-
-            if(message.contains("success"))
-                textView.setTextColor(Color.GREEN);
-            else
-                textView.setTextColor(Color.RED);
-        }
-        Log.i(TAG, "setMessageView - end");
-    }
-
     public String validateUser(User user)
     {
 
@@ -93,6 +74,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
              message = "ERROR: username is mandatory!";
             return message;
         }
+        //TODO: Validate if user already exists
         message = "User details saved successfully!";
         return message;
     }
