@@ -30,5 +30,19 @@
         android:layout_marginTop="212dp"
         android:text="Try Again" />
 
-    <include layout="@layout/activity_tool_bar"/>
+    <Button
+        android:id="@+id/navigate_to_restaurant_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="275dp"
+        android:text="Let's Go!" />
+
+    <include
+        layout="@layout/activity_tool_bar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp" />
 </RelativeLayout>
