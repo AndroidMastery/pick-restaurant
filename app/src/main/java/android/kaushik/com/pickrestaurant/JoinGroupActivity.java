@@ -21,10 +21,8 @@ public class JoinGroupActivity extends AppCompatActivity implements View.OnClick
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private final String TAG = "UserProfileActivity";
-    public final String SHARED_PREFERENCES = "android.kaushik.com.pickrestaurant";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor sharedPreferencesEditor;
-    private final String GROUP_NAME_KEY = "GROUP_NAME";
     private final String APP_MODE_KEY = "APP_MODE";
     private final String APP_MODE_GROUP = "GROUP_MODE";
 
@@ -35,7 +33,7 @@ public class JoinGroupActivity extends AppCompatActivity implements View.OnClick
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
 
         findViewById(R.id.join_group_save_button).setOnClickListener(this);
     }
@@ -56,17 +54,22 @@ public class JoinGroupActivity extends AppCompatActivity implements View.OnClick
     public void join_user_to_group(){
         TextView textView = (TextView) findViewById(R.id.group_name_text_box);
         final String groupName = textView.getText().toString();
-        String username = sharedPreferences.getString("username", "");
+        String username = sharedPreferences.getString(Constants.FCM_USERNAME, "");
 
         // Query to get the list of users with username equal to given username
-        Query usersList = databaseReference.child("users").orderByChild("username").equalTo(username);
+        Query usersList = databaseReference.child(Constants.FCM_USERS)
+                .orderByChild(Constants.FCM_USERNAME).equalTo(username);
         usersList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
                     //Update groupName for all the users resulted in the query
-                    snapshot.getRef().child("groupName").setValue(groupName);
+                    snapshot.getRef().child(Constants.FCM_GROUPNAME).setValue(groupName);
+                    sharedPreferencesEditor = sharedPreferences.edit();
+                    sharedPreferencesEditor.putString(Constants.FCM_GROUPNAME, groupName);
+                    sharedPreferencesEditor.putString(APP_MODE_KEY, APP_MODE_GROUP);
+                    sharedPreferencesEditor.apply();
                 }
             }
 
@@ -76,10 +79,7 @@ public class JoinGroupActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        sharedPreferencesEditor = sharedPreferences.edit();
-        sharedPreferencesEditor.putString(GROUP_NAME_KEY, groupName);
-        sharedPreferencesEditor.putString(APP_MODE_KEY, APP_MODE_GROUP);
-        sharedPreferencesEditor.apply();
+
 
     }
 

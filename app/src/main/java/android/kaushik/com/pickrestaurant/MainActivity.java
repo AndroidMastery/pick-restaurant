@@ -6,11 +6,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.kaushik.com.pickrestaurant.firebase.FirebaseAPITask;
+import android.kaushik.com.pickrestaurant.firebase.User;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,6 +35,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String APP_MODE_INDIVIDUAL = "INDIVIDUAL_MODE";
     private final String APP_MODE_GROUP = "GROUP_MODE";
     private final String GROUP_NAME_KEY = "GROUP_NAME";
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -46,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Team Lunch");
         setSupportActionBar(toolbar);
+
+        //Initialize firebase database reference
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(); // this refers to the root of database
 
         // Use SharedPreferences to store data internally
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
@@ -86,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.show_all_button).setOnClickListener(this);
         findViewById(R.id.new_poll_fab_action).setOnClickListener(this);
         findViewById(R.id.add_user_fab_action).setOnClickListener(this);
+        findViewById(R.id.buzz_team_button).setOnClickListener(this);
 
 
     }
@@ -190,10 +215,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.new_poll_fab_action:
                 goToActivity(CreatePollActivity.class);
                 break;
+            case R.id.buzz_team_button:
+                buzzTeam();
             default:
                 break;
         }
 
+
+    }
+
+    public void buzzTeam()
+    {
+        /* TODO: Below implementation needs to go and push notifications should be sent to a topic
+        subscribed by the team. Topic name should be the group name. */
+        // Get the current group of the user
+        String groupname = sharedPreferences.getString(Constants.FCM_GROUPNAME, "");
+        Log.i(TAG, "Trying to buzz team " + groupname);
+        //Get list of users in the group
+        databaseReference.child(Constants.FCM_USERS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+
+                    User user = snapshot.getValue(User.class);
+                    if(user.getGroupName().equals(sharedPreferences.getString(Constants.FCM_GROUPNAME, "")) && !user.getUsername().equals(sharedPreferences.getString(Constants.FCM_USERNAME, "")))
+                    {
+                        String token = user.getDeviceToken();
+                        String api_key = "key="+sharedPreferences.getString(Constants.API_KEY_KEY, "");
+                        new FirebaseAPITask(api_key, token).execute(new String[2]);
+                        //Log.i(TAG, "Buzz sent to " + user.getUsername());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

@@ -40,7 +40,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        sharedPreferences = getSharedPreferences("android.kaushik.com.pickrestaurant", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
 
         Button save_button = findViewById(R.id.user_profile_save_button);
         save_button.setOnClickListener(this);
@@ -56,7 +56,9 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
                 User user = new User(this.getStringFromTextViewId(R.id.username_textview),
                         this.getStringFromTextViewId(R.id.firstname_textview),
-                        this.getStringFromTextViewId(R.id.lastname_textview));
+                        this.getStringFromTextViewId(R.id.lastname_textview),
+                        sharedPreferences.getString(Constants.FCM_TOKEN, ""));
+
 
                 // Add user details to firebase and saves username in shared preferences
                 addUser(user);
@@ -86,13 +88,13 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         if(!validateUserMessage.startsWith("ERROR"))
         {
             // Get database reference
-            databaseReference = firebaseDatabase.getReference("users");
+            databaseReference = firebaseDatabase.getReference(Constants.FCM_USERS);
             databaseReference.push().setValue(user);
 
             sharedPreferencesEditor = sharedPreferences.edit();
-            sharedPreferencesEditor.putString("username",user.getUsername());
-            sharedPreferencesEditor.putString("firstname", user.getFirstname());
-            sharedPreferencesEditor.putString("lastname", user.getLastname());
+            sharedPreferencesEditor.putString(Constants.FCM_USERNAME,user.getUsername());
+            sharedPreferencesEditor.putString(Constants.FCM_FIRSTNAME, user.getFirstname());
+            sharedPreferencesEditor.putString(Constants.FCM_LASTNAME, user.getLastname());
             sharedPreferencesEditor.apply();
             Log.i(TAG, "username : " + user.getUsername() + " added to preferences successfully!");
 

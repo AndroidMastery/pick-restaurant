@@ -11,6 +11,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String groupName;
+    private String deviceToken;
 
     User(){ }
 
@@ -19,6 +20,15 @@ public class User {
         this.firstname = firstname;
         this.lastname = lastname;
         this.groupName = "(Not Available)";
+        this.deviceToken = "";
+    }
+
+    public User(String username, String firstname, String lastname, String deviceToken) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.groupName = "(Not Available)";
+        this.deviceToken = deviceToken;
     }
 
     public String getUsername() {
@@ -53,4 +63,11 @@ public class User {
         this.groupName = groupName;
     }
 
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 }

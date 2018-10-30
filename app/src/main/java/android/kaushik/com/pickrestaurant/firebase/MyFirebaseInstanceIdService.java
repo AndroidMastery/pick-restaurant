@@ -1,5 +1,7 @@
 package android.kaushik.com.pickrestaurant.firebase;
 
+import android.content.SharedPreferences;
+import android.kaushik.com.pickrestaurant.Constants;
 import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
@@ -15,10 +17,17 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.i(TAG, "Refreshed token: " + refreshedToken);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
+        String username = sharedPreferences.getString(Constants.CURRENT_USERNAME, "");
+
         // save this token in firebase database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("app_config").child("token").setValue(refreshedToken);
+        databaseReference.child(username).child(Constants.FCM_TOKEN).setValue(refreshedToken);
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.FCM_TOKEN, refreshedToken);
+        editor.putString(Constants.API_KEY_KEY, Constants.API_KEY);
+        editor.apply();
     }
 }
