@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +15,8 @@ import java.util.Random;
 public class ShowRestaurant extends AppCompatActivity implements View.OnClickListener{
 
     private String current_restaurant;
-
+    private ArrayList<String> restaurantList;
+    private ArrayList<String> tempRestaurantList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,8 @@ public class ShowRestaurant extends AppCompatActivity implements View.OnClickLis
         Button navigate_to_restaurant_button = (Button) findViewById(R.id.navigate_to_restaurant_button);
         navigate_to_restaurant_button.setOnClickListener(this);
 
-
+        restaurantList = intent.getStringArrayListExtra("restaurantList");
+        tempRestaurantList = restaurantList;
     }
 
     @Override
@@ -53,17 +56,26 @@ public class ShowRestaurant extends AppCompatActivity implements View.OnClickLis
 
     public void pick_restaurant()
     {
-        Intent intent = getIntent();
-        ArrayList<String> restaurantList = intent.getStringArrayListExtra("restaurantList");
 
-        Random random = new Random();
-        int i = random.nextInt(restaurantList.size());
-        String restaurantName = restaurantList.get(i);
-        current_restaurant = restaurantName;
-        TextView textView = (TextView) findViewById(R.id.show_restaurant);
-        textView.setText(restaurantName);
+        if(!tempRestaurantList.isEmpty())
+        {
+            Random random = new Random();
+            int i = random.nextInt(tempRestaurantList.size());
+            String restaurantName = tempRestaurantList.get(i);
+            current_restaurant = restaurantName;
+            TextView textView = (TextView) findViewById(R.id.show_restaurant);
+            textView.setText(restaurantName);
+            tempRestaurantList.remove(i);
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "No more restaurants in the list", Toast.LENGTH_SHORT );
+            toast.show();
+        }
 
     }
+
+
 
     public void navigate_to_restaurant()
     {
