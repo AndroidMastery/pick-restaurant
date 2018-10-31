@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.app.SearchManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,26 +18,30 @@ public class ShowRestaurant extends AppCompatActivity implements View.OnClickLis
     private String current_restaurant;
     private ArrayList<String> restaurantList;
     private ArrayList<String> tempRestaurantList;
+    private final String TAG = "Show Restaurant";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_restaurant);
 
         Intent intent = getIntent();
-        String restaurantName = intent.getStringExtra("restaurant");
-        current_restaurant = restaurantName;
-        ArrayList<String> restaurantList = intent.getStringArrayListExtra("restaurantList");
-        TextView textView = (TextView) findViewById(R.id.show_restaurant);
-        textView.setText(restaurantName);
-
-        Button try_again_button = (Button) findViewById(R.id.try_again_button);
-        try_again_button.setOnClickListener(this);
-
-        Button navigate_to_restaurant_button = (Button) findViewById(R.id.navigate_to_restaurant_button);
-        navigate_to_restaurant_button.setOnClickListener(this);
 
         restaurantList = intent.getStringArrayListExtra("restaurantList");
         tempRestaurantList = restaurantList;
+
+        String restaurantName = pick_restaurant();
+        current_restaurant = restaurantName;
+
+        TextView textView = findViewById(R.id.show_restaurant);
+        textView.setText(restaurantName);
+
+        Button try_again_button = findViewById(R.id.try_again_button);
+        try_again_button.setOnClickListener(this);
+
+        Button navigate_to_restaurant_button = findViewById(R.id.navigate_to_restaurant_button);
+        navigate_to_restaurant_button.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -54,7 +59,7 @@ public class ShowRestaurant extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void pick_restaurant()
+    public String pick_restaurant()
     {
 
         if(!tempRestaurantList.isEmpty())
@@ -62,19 +67,21 @@ public class ShowRestaurant extends AppCompatActivity implements View.OnClickLis
             Random random = new Random();
             int i = random.nextInt(tempRestaurantList.size());
             String restaurantName = tempRestaurantList.get(i);
+
             current_restaurant = restaurantName;
-            TextView textView = (TextView) findViewById(R.id.show_restaurant);
+            TextView textView = findViewById(R.id.show_restaurant);
             textView.setText(restaurantName);
             tempRestaurantList.remove(i);
+            return restaurantName;
         }
         else
         {
             Toast toast = Toast.makeText(getApplicationContext(), "No more restaurants in the list", Toast.LENGTH_SHORT );
             toast.show();
+            return null;
         }
 
     }
-
 
 
     public void navigate_to_restaurant()
