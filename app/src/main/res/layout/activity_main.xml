@@ -41,6 +41,34 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/group_chat_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:width="300dp"
+                android:background="@drawable/button_curved_edges"
+                android:text="Group Chat"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/buzz_team_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:width="300dp"
+                android:background="@drawable/button_curved_edges"
+                android:text="Buzz Team"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <Button
                 android:id="@+id/create_poll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,20 +92,6 @@
                 android:width="300dp"
                 android:background="@drawable/button_curved_edges"
                 android:text="Add Restaurant"
-                android:textAllCaps="false"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/buzz_team_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:width="300dp"
-                android:background="@drawable/button_curved_edges"
-                android:text="Buzz Team"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
 

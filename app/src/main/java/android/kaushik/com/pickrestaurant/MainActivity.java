@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.new_poll_fab_action).setOnClickListener(this);
         findViewById(R.id.add_user_fab_action).setOnClickListener(this);
         findViewById(R.id.buzz_team_button).setOnClickListener(this);
+        findViewById(R.id.group_chat_button).setOnClickListener(this);
 
 
     }
@@ -217,11 +218,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buzz_team_button:
                 buzzTeam();
+            case R.id.group_chat_button:
+                group_chat_window();
             default:
                 break;
         }
 
 
+    }
+
+    public void group_chat_window()
+    {
+        Intent intent = new Intent(this, GroupChatWindowActivity.class);
+        startActivity(intent);
     }
 
     public void buzzTeam()
